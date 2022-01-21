@@ -29,7 +29,7 @@ Each extractor extends AbstractHTMLExtractor and implements the `extractFields(L
           
 ## Requirements:
 - Java17-jdk or Java1.8-jdk
-- [chromedriver](https://chromedriver.chromium.org/downloads)  and Chrome Web broswer according to your system.
+- [chromedriver](https://chromedriver.chromium.org/downloads)  and Chrome Web broswer according to your system [For Dynamic Extraction].
 - ConfigurationSchema.json
 - A website to crawl from, json schema using css selectors.
 
