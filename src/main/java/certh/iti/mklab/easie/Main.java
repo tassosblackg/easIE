@@ -20,54 +20,59 @@ import certh.iti.mklab.easie.configuration.ConfigurationReader;
 import certh.iti.mklab.easie.exception.IllegalSchemaException;
 import certh.iti.mklab.easie.exception.PaginationException;
 import certh.iti.mklab.easie.exception.RelativeURLException;
-import com.github.fge.jsonschema.core.exceptions.ProcessingException;
 import certh.iti.mklab.easie.executor.WrapperExecutor;
 import certh.iti.mklab.easie.executor.handlers.DataHandler;
+import com.github.fge.jsonschema.core.exceptions.ProcessingException;
+import org.json.JSONArray;
+import org.jsoup.select.Selector.SelectorParseException;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Stream;
-
-import com.google.gson.Gson;
-import org.bson.Document;
-import org.bson.json.JsonWriterSettings;
-import org.json.JSONArray;
-import org.jsoup.select.Selector.SelectorParseException;
 
 /**
  * @author vasgat
  */
 public class Main {
+    private void run_executor(WrapperExecutor executor, Configuration config) throws IOException {
+        ArrayList entities = (ArrayList) executor.getCompanyInfo();
+        ArrayList metrics = executor.getExtractedMetrics();
 
+        DataHandler dh = new DataHandler(entities, metrics, config.entity_name);
+
+        if (config.store != null) {
+            dh.store(config.store, config.source_name);
+            System.out.println("EXTRACTION TASK COMPLETED");
+        } else {
+            JSONArray array = new JSONArray(dh.exportJson());
+            System.out.println(array.toString(4));
+        }
+    }
 
     public static void main(String[] args) throws URISyntaxException, NoSuchAlgorithmException {
+        Main easie = new Main();
         if (args.length == 1) {
             try {
-                ConfigurationReader reader = new ConfigurationReader(args[0], ".");
+                ConfigurationReader reader = new ConfigurationReader(args[0], "." + System.getProperty("file.separator"));
                 Configuration config = reader.getConfiguration();
 
-                WrapperExecutor executor = new WrapperExecutor(config, ".");
+                // set path according OS uses '\' or '/'
+                String chrome_path = "." + System.getProperty("file.separator");
 
-                ArrayList companies = (ArrayList) executor.getCompanyInfo();
-                ArrayList metrics = executor.getExtractedMetrics();
 
-                DataHandler dh = new DataHandler(companies, metrics, config.entity_name);
+                if (System.getProperty("file.separator").equals("\\")) {
 
-                if (config.store != null) {
-                    dh.store(config.store, config.source_name);
-                    System.out.println("EXTRACTION TASK COMPLETED");
+                    System.out.println("Windows");
+                    chrome_path = chrome_path + "chromedriver.exe";
                 } else {
-                    JSONArray array = new JSONArray(dh.exportJson());
-                    System.out.println(array.toString(4));
+                    chrome_path = chrome_path + "chromedriver";
                 }
+
+                WrapperExecutor executor = new WrapperExecutor(config, chrome_path);
+                easie.run_executor(executor,config);
+
             } catch (IOException ex) {
                 System.out.println(ex.getMessage());
             } catch (ProcessingException ex) {
@@ -87,25 +92,17 @@ public class Main {
             } catch (KeyManagementException e) {
                 e.printStackTrace();
             }
-        } else if (args.length == 2) {
+        }
+        // if passing the chromedriver path as an extra argument
+        else if (args.length == 2) {
             try {
-                ConfigurationReader reader = new ConfigurationReader(args[0], args[1]);
+                System.out.println("args: 1|"+args[0]+" args: 2|"+args[1]);
+                ConfigurationReader reader = new ConfigurationReader(args[0], "." + System.getProperty("file.separator"));
                 Configuration config = reader.getConfiguration();
 
                 WrapperExecutor executor = new WrapperExecutor(config, args[1]);
+                easie.run_executor(executor,config);
 
-                ArrayList companies = (ArrayList) executor.getCompanyInfo();
-                ArrayList metrics = executor.getExtractedMetrics();
-
-                DataHandler dh = new DataHandler(companies, metrics, config.entity_name);
-
-                if (config.store != null) {
-                    dh.store(config.store, config.source_name);
-                    System.out.println("EXTRACTION TASK COMPLETED");
-                } else {
-                    JSONArray array = new JSONArray(dh.exportJson());
-                    System.out.println(array.toString(4));
-                }
             } catch (IOException ex) {
                 System.out.println(ex.getMessage());
             } catch (ProcessingException ex) {

@@ -16,23 +16,6 @@
 package certh.iti.mklab.easie.extractors.staticpages;
 
 import certh.iti.mklab.easie.extractors.Fetcher;
-
-import java.io.*;
-import java.net.*;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.security.KeyManagementException;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.security.cert.X509Certificate;
-
-import com.google.gson.Gson;
-import org.apache.tika.parser.txt.CharsetDetector;
-import org.bson.BsonString;
-import org.bson.json.Converter;
-import org.bson.json.JsonMode;
-import org.bson.json.JsonWriterSettings;
-import org.json.JSONObject;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -41,6 +24,13 @@ import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.cert.X509Certificate;
 
 /**
  * @author vasgat

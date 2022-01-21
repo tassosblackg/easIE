@@ -19,19 +19,13 @@ import certh.iti.mklab.easie.companymatching.CompanyMatcher;
 import certh.iti.mklab.easie.companymatching.CompanySearcher;
 import certh.iti.mklab.easie.companymatching.CountryAbreviationsLoader;
 import com.mongodb.client.MongoCollection;
+import org.bson.Document;
+import org.bson.json.JsonWriterSettings;
 
 import java.io.*;
 import java.net.UnknownHostException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.*;
-
-import org.apache.commons.lang3.StringEscapeUtils;
-import org.bson.Document;
-import org.bson.json.JsonWriterSettings;
 
 /**
  * @author vasgat
