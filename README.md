@@ -27,3 +27,25 @@ Each extractor extends AbstractHTMLExtractor and implements the `extractFields(L
           PaginationIterator extractor = new PaginationIterator(base_url, relative_url, next_page_selector);
           extractor.extractFields(fields);
           
+## Requirements:
+- Java17-jdk or Java1.8-jdk
+- [chromedriver](https://chromedriver.chromium.org/downloads)  and Chrome Web broswer according to your system.
+- ConfigurationSchema.json
+- A website to crawl from, json schema using css selectors.
+
+## How To Use:
+- 1 arg execution:
+
+          >$ java -jar easIE.jar website2crawl.json
+          
+          *easIE.jar, ConfigurationSchema.json and chromedriver MUST be in the same folder.*
+
+- 2 args execution:
+
+          >$ java -jar easIE.jar website2crawl.json path2chromedriver
+          
+          *easIE.jar, ConfigurationSchema.json MUST be in the same folder.
+
+## More Info:
+
+Project developed using Intellij IDE and Maven project manager.
