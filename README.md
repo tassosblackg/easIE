@@ -31,7 +31,7 @@ Each extractor extends AbstractHTMLExtractor and implements the `extractFields(L
 - Java17-jdk or Java1.8-jdk
 - [chromedriver](https://chromedriver.chromium.org/downloads)  and Chrome Web broswer according to your system [For Dynamic Extraction].
 - [ConfigurationSchema.json](https://github.com/tassosblackg/easIE/blob/soClose_patch/ConfigurationSchema.json)
-- A website to crawl from, json schema using css selectors.
+- A website to crawl from, json schema [check example](https://github.com/tassosblackg/easIE/blob/soClose_patch/configuration_files/religiousgreece_example_group_url2.json) using css selectors.
 
 ## How To Use:
 - 1 arg execution:
