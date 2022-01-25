@@ -45,7 +45,25 @@ Each extractor extends AbstractHTMLExtractor and implements the `extractFields(L
           >$ java -jar easIE.jar website2crawl.json path2chromedriver
           
           *easIE.jar, ConfigurationSchema.json MUST be in the same folder.
+          
+## Example:
+1.| Download or Get this example json [religiousgreece_example_group_url2.json](https://github.com/tassosblackg/easIE/blob/soClose_patch/configuration_files/religiousgreece_example_group_url2.json) 
+
+2.| Edit line 71, changing to your path, where to store the results.
+
+3.| Get the *easIE.jar*,*ConfigSchema.json*, and the appropriate *chromedriver* (according to your Chrome Browser version).
+
+
+4.| Execution:
+          
+          $> java -jar easIE.jar religiousgreece_example_group_url2.json 
+          
+           
+ **NOTICE:**
+ > easIE.jar, ConfigSchema.json, religiousgreece_example_group_url2.json and chromedriver are on the same directory.
+ 
+------------------------------------------------------------------------------------------------------------------------------
 
 ## More Info:
 
-Project developed using Intellij IDE and Maven project manager.
+> Project developed using Intellij IDE and Maven project manager.
