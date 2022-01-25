@@ -49,9 +49,9 @@ Each extractor extends AbstractHTMLExtractor and implements the `extractFields(L
 ## Example:
 1.| Download or Get this example json [religiousgreece_example_group_url2.json](https://github.com/tassosblackg/easIE/blob/soClose_patch/configuration_files/religiousgreece_example_group_url2.json) 
 
-2.| Edit line 71, changing to your path, where to store the results.
+2.| Edit *line 71*, changing to your path, where to store the results.
 
-3.| Get the *easIE.jar*,*ConfigSchema.json*, and the appropriate *chromedriver* (according to your Chrome Browser version).
+3.| Get the [*easIE.jar*](https://github.com/tassosblackg/easIE/releases), [*ConfigSchema.json*](https://github.com/tassosblackg/easIE/blob/soClose_patch/ConfigurationSchema.json), and the appropriate [*chromedriver*](https://chromedriver.chromium.org/downloads) (according to your Chrome Browser version).
 
 
 4.| Execution:
